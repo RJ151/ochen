@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="hats">
+  <head>
+    <title>Ochen Hats</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../CSS/index.css" media="all">
+    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="../JS/hatsApp.js"></script>
+  </head>
+
+  <body ng-controller="HatController as thehats">
+
+
+    <div class="container">
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+  
+    <div>
+      <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li class="active"><a href="products.html">Our Products</a></li>
+            <li><a href="dress.html">Dresses</a></li>
+            <li><a href="shoes.html">Shoes</a></li>
+            <li class="active"><a href="#">Hats</a></li>
+            <li><a href="cart.html">Shopping Center</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Sitemap</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+      <div class="jumbotron">
+
+        <h1 class="text-center"><i>Ochen Fashion</i></h1>
+<hr>
+	<h2 class="text-center">Hats</h2>
+<hr>
+<div class="list-group">
+
+      <div class="list-group-item" ng-repeat="hat in thehats.products">
+        <h3 class="text-primary">{{hat.name}} <em class="pull-right text-info" >{{hat.ranking}}</em></h3>
+
+        <div ng-controller="PictureController as picture"  ng-show="hat.image.length">
+          <div class="img-thumbnail">
+            <img ng-src="{{hat.image[picture.current]}}" height="400" width="350" /> <!--width="300" height="400" (Ideal for mobile)-->
+          </div>
+        </div>
+<br>
+        <section ng-controller="TabController as tab">
+          <ul class="nav nav-pills">
+            <li ng-class="{ active:tab.isSet(1) }">
+              <a href ng-click="tab.setTab(1)">Summary</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(2) }">
+              <a href ng-click="tab.setTab(2)">Quick Info</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(3) }">
+              <a href ng-click="tab.setTab(3)">Price</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(4) }">
+              <a href ng-click="tab.setTab(4)">Reviews</a>
+            </li>
+          </ul>
+
+          <div ng-show="tab.isSet(1)">
+            <h4>Summary</h4>
+            <blockquote>{{hat.summary}}</blockquote>
+          </div>
+
+          <div ng-show="tab.isSet(2)">
+            <h4>Quick Info</h4>
+              <blockquote>Release Date: {{hat.release}}</blockquote>
+	            <blockquote>Material: {{hat.material}}</blockquote>
+          </div>
+	        <div ng-show="tab.isSet(3)">
+            <h4>Price</h4>
+	        	<blockquote>${{hat.price}}</blockquote>
+          </div>
+          <div ng-show="tab.isSet(4)">
+          <ul>
+              <h4>Reviews</h4>
+              <li ng-repeat="review in hat.reviews">
+                <blockquote>
+                  <strong>{{review.stars}} Stars</strong>
+                  {{review.body}}
+                  <cite class="clearfix">—{{review.author}}&nbsp; {{review.createdOn | date}}</cite>
+                </blockquote>
+              </li>
+            </ul>
+          <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+                  ng-submit="reviewForm.$valid && reviewCtrl.addReview(hat)" novalidate>
+              <!--  Live Preview -->
+              <blockquote>
+                <strong>{{reviewCtrl.review.stars}} Stars</strong>
+                {{reviewCtrl.review.body}}
+                <cite class="clearfix">- {{reviewCtrl.review.author}} &nbsp; {{reviewCtrl.review.createdOn | date}}</cite>
+              </blockquote>
+
+              <!--  Review Form -->
+              <h4>Submit a Review</h4>
+              <fieldset class="form-group">
+                <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
+                  <option value="">Rate the Product</option>
+                </select>
+              </fieldset>
+              <fieldset class="form-group">
+                <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Add your review here" title="Review" required></textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="TheGreatOliverChen@fashionlegend.com" title="Email" required/>
+              </fieldset>
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-primary pull-left" value="Submit Review" />
+              </fieldset>
+            </form>
+            </div>
+          </div>
+</div>
+</body>
+</html>

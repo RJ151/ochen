@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html ng-app="">
+  <head>
+    <title>Shopping Center</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../CSS/index.css" media="all">
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script type="text/javascript" src="../JS/cartApp.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="../JS/employeeCenter.js"></script>
+  </head>
+
+  <body>
+
+
+    <div class="container">
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+  
+    <div>
+      <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="cart.html">Shopping Center</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li><a href="sitemap.html">Sitemap</a></li>
+            <li class="active"><a href="#">Employee Center</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+      <div class="jumbotron">
+
+        <h1 class="text-center"><i>Ochen Fashion</i></h1>
+<hr>
+	<h2 class="text-center">Employee Center</h2>
+<hr>
+<h3><b>Company ID:</b> <input type="text" class="form-control"></h3>
+<h3><b>Password:</b> <input type="password" class="form-control"></h3>
+<button type="button" class="btn btn-primary btn-block btn-lg allOptionsButton">Submit</button>
+<hr>
+
+<div class="allOptions">
+<div class="link"><button type="button" class="btn btn-warning btn-block btn-lg modifyOrderButton">Modify Previous Order</button></div>
+
+<!--Modify Order- No payment necessary -->
+<div class="modifyOrder">
+<h3><b>Order Number:</b> <input type="text" class="form-control"></h3>
+
+ <form>
+  <ul class="list-group">
+
+
+<div ng-controller="CartController">
+    <table class="table">
+        <tr>
+            <th>Product Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="product in form.products">
+            <td>
+                <input type="text" ng-model="product.name">
+            </td>
+            <td>
+                <input type="number" step="0.5" ng-model="product.size">
+            </td>
+            <td>
+                <input type="number" min="0" max="15" ng-model="product.quantity">
+            </td>
+            <td>
+                <input type="number" min="120" ng-model="product.cost">
+            </td>
+            <td>{{product.quantity * product.cost | currency}}</td>
+            <td>[<a href ng-click="removeProduct($index)">X</a>]</td>
+        </tr>
+        <tr>
+            <td><a href ng-click="addProduct()" class="btn btn-default">Purchase Another Product</a></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td id="total">{{total() | currency}}</td>
+        </tr>
+    </table>
+<hr>
+
+<p>Select shipping method:</p>
+<select class="form-control" id="payment">
+  <option value="0">No Change</option>
+  <option value="0">Ground (+$0.00)</option>
+  <option value="11">Two-Day (+$11.00)</option>
+  <option value="23">Next Day (+$23.00)</option>
+</select>
+<br>
+
+<button type="button" class="btn btn-default btn-block shippingButton">Change Shipping Address</button>
+<div class="shipping">
+  <p>Shipping Name: <br>
+  <input type="text" class="form-control" required>
+  </p>
+
+  <p>Street Address<br>
+  <input type="text"class="form-control"  required>
+  <p>City<br>
+  <input type="text"class="form-control"  required>
+  <p>State/Province <br>
+  <input type="text"class="form-control"  required>
+  <p>Zip Code<br>
+  <input type="text" class="form-control" required>
+  </p>
+</div>
+
+
+<hr>
+<button type="button" class="btn btn-warning btn-block submitOrderModification">Confirm Order Modification</button>
+<hr>
+
+</form>
+</div>
+</div>
+
+<div class="link"><button type="button" class="btn btn-danger btn-block btn-lg cancelOrderButton">Cancel Previous Order</button></div>
+
+<div class="cancelOrder">
+<h3><b>Enter The Order Number Below:</b> <input type="text" class="form-control"></h3>
+
+
+<hr><button type="button" class="btn btn-danger btn-block submitOrderCancellation">Cancel Your Order</button><hr>
+</div>
+
+
+<div class="link"><button type="button" class="btn btn-info btn-block btn-lg newOrderButton">Place New Order</button></div>
+
+<!--Place Order -->
+<div class="placeOrder">
+<h2>Place The Order Below</h2>
+<h4 class="note">**Note: Prices and Product Names must match those listed in product pages accordingly!</h4>
+ <form>
+  <ul class="list-group">
+
+
+<div ng-controller="CartController">
+    <table class="table">
+        <tr>
+            <th>Product Name</th>
+            <th>Size</th>
+            <th>Quantity</th>
+            <th>Cost</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="product in form.products">
+            <td>
+                <input type="text" ng-model="product.name">
+            </td>
+            <td>
+                <input type="number" step="0.5" ng-model="product.size">
+            </td>
+            <td>
+                <input type="number" min="0" max="15" ng-model="product.quantity">
+            </td>
+            <td>
+                <input type="number" min="120" ng-model="product.cost">
+            </td>
+            <td>{{product.quantity * product.cost | currency}}</td>
+            <td>[<a href ng-click="removeProduct($index)">X</a>]</td>
+        </tr>
+        <tr>
+            <td><a href ng-click="addProduct()" class="btn btn-default">Purchase Another Product</a></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td id="total">{{total() | currency}}</td>
+        </tr>
+    </table>
+<hr>
+
+
+<h2>Select shipping method.</h2>
+<select class="form-control" id="payment">
+  <option value="0">Ground (+$0.00)</option>
+  <option value="11">Two-Day (+$11.00)</option>
+  <option value="23">Next Day (+$23.00)</option>
+</select>
+<br>
+<p>Shipping Name: <br>
+  <input type="text" class="form-control" required>
+  </p>
+
+  <p>Street Address<br>
+  <input type="text"class="form-control"  required>
+  <p>City<br>
+  <input type="text"class="form-control"  required>
+  <p>State/Province <br>
+  <input type="text"class="form-control"  required>
+  <p>Zip Code<br>
+  <input type="text" class="form-control" required>
+</p>
+
+
+<h2>Select payment method.</h2>
+<div class="select">
+<select class="form-control" id="bestoption">
+  <option value="card">Credit/Debit Card</option>
+  <option value="check">Check</option>
+</select>
+<hr>
+<div id="card">
+Name on Card: <input type="text">Card Number: <input type="text">
+Exp Date: <select>
+  <option value="1">01</option>
+  <option value="2">02</option>
+  <option value="3">03</option>
+  <option value="4">04</option>
+  <option value="5">05</option>
+  <option value="6">06</option>
+  <option value="7">07</option>
+  <option value="8">08</option>
+  <option value="9">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+</select> / <select>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+</select>
+
+</div>
+
+<div id="check">
+Name on Account: <input type="text">Routing Number: <input type="text"> Account Number: <input type="text">
+</div>
+
+</div>
+<hr>
+<button type="button" class="btn btn-primary btn-block submitPayment">Submit Payment</button>
+</ul>
+</form>
+
+</div>
+</div>
+
+
+
+
+
+</body>
+</html>

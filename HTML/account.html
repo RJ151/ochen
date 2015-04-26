@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="">
+  <head>
+    <title>Ochen Fashion</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../CSS/index.css" media="all">
+  <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+      <script type="text/javascript" src="../JS/cartApp.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $(".submit").click(function(){
+   alert("Check your email to confirm the account.");
+  });
+});
+</script>
+</head>
+
+  <body>
+
+
+    <div class="container">
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+  
+    <div>
+      <ul class="nav navbar-nav">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="products.html">Our Products</a></li>
+            <li><a href="cart.html">Shopping Center</a></li>
+            <li><a href="contactus.html">Contact Us</a></li>
+            <li class="active"><a href="#">Create Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+      <div class="jumbotron">
+
+        <h1 class="text-center">21st Century Education Advice</h1>
+<hr>
+	<h2 class="text-center"> Create Account</h2>
+<hr>
+<form ng-app=""  ng-controller="validateCtrl"
+name="myForm" novalidate>
+
+<p>Username:<br>
+  <input class="form-control" type="text" name="user" ng-model="user" required>
+  <span style="color:red" ng-show="myForm.user.$dirty && myForm.user.$invalid">
+  <span ng-show="myForm.user.$error.required">Username is required.</span>
+  </span>
+</p>
+
+<p>Email:<br>
+  <input type="email" class="form-control" name="email" ng-model="email" required>
+  <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+  <span ng-show="myForm.email.$error.required">Email is required.</span>
+  <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+  </span>
+</p>
+<p>Password:<br>
+  <input type="password" class="form-control" name="password" ng-model="password" required>
+</p>
+
+<p>Shipping Address: Name<br>
+  <input type="text" class="form-control" required>
+</p>
+
+<p>Street Address<br>
+  <input type="text"class="form-control"  required>
+
+  <p>Zip Code<br>
+  <input type="text" class="form-control" required>
+</p>
+<p class="submit">
+  <input type="submit">
+</p>
+</form>
+</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
