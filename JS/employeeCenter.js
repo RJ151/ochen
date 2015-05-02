@@ -5,14 +5,15 @@ $(document).ready(function(){
     $('.cancelOrder').hide();
     $('.placeOrder').hide();
     $('.shipping').hide();
-    
+
     $('.allOptionsButton').click(function(){
+      alert("You are now logged in.");
       $('.allOptions').show();
     });
     $('.shippingButton').click(function(){
       $('.shipping').slideToggle();
     });
-    
+
     $('.newOrderButton').click(function(){
       $('.placeOrder').slideToggle();
     });
@@ -23,18 +24,18 @@ $(document).ready(function(){
     $('.cancelOrderButton').click(function(){
       $('.cancelOrder').slideToggle();
     });
-    
+
     $('.submitPayment').click(function(){
       alert("The order has been submitted.");
     });
     $('.submitOrderModification').click(function(){
       alert("The order has been modified.");
     });
-    
+
     $('.submitOrderCancellation').click(function(){
       alert("The order has been cancelled.");
     });
-    
+
     $('#bestoption').change(function(){
         if($('#bestoption').val() == 'card') {
 		      $('#check').hide();
